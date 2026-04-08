@@ -1,0 +1,18 @@
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 60px;
+}
+.service-card {
+  padding: 30px;
+  background: #00cec9;
+  color: white;
+  border-radius: 15px;
+  text-align: center;
+}
+@media(max-width:768px){
+  .hero { flex-direction: column; text-align: center; }
+  .features { flex-direction: column; gap: 20px; }
+  .doctor-grid { flex-direction: column; }
+}

@@ -1,0 +1,61 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+}
+.hero img {
+  width: 400px;
+  border-radius: 20px;
+}
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 60px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+.card:hover { transform: translateY(-10px); }
+
+.doctors {
+  text-align: center;
+  padding: 60px;
+}
+.doctor-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.doctor {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+.doctor img { width: 100px; border-radius: 50%; }
+
+.testimonials {
+  text-align: center;
+  padding: 60px;
+  background: #f1f1f1;
+}
+.testimonial {
+  margin: 10px auto;
+  width: 50%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+@media(max-width:768px){
+  .hero { flex-direction: column; text-align: center; }
+  .features { flex-direction: column; gap: 20px; }
+  .doctor-grid { flex-direction: column; }
+}

@@ -1,0 +1,11 @@
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #0a3d62;
+  color: white;
+}
+@media(max-width:768px){
+  .hero { flex-direction: column; text-align: center; }
+  .features { flex-direction: column; gap: 20px; }
+  .doctor-grid { flex-direction: column; }
+}

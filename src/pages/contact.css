@@ -1,0 +1,29 @@
+.contact { text-align: center; padding: 60px; }
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: auto;
+}
+input, textarea {
+  margin: 10px 0;
+  padding: 10px;
+}
+button {
+  background: #0984e3;
+  color: white;
+  padding: 10px;
+  border: none;
+}
+
+
+@media(max-width:768px){
+  .hero { flex-direction: column; text-align: center; }
+  .features { flex-direction: column; gap: 20px; }
+  .doctor-grid { flex-direction: column; }
+}
+@media(max-width:768px){
+  .hero { flex-direction: column; text-align: center; }
+  .features { flex-direction: column; gap: 20px; }
+  .doctor-grid { flex-direction: column; }
+}
