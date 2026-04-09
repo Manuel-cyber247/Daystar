@@ -1,7 +1,57 @@
-.about { text-align: center; padding: 60px; }
-.about img { width: 60%; border-radius: 20px; }
-@media(max-width:768px){
-  .hero { flex-direction: column; text-align: center; }
-  .features { flex-direction: column; gap: 20px; }
-  .doctor-grid { flex-direction: column; }
+/* File: pages/about.css */
+.about-hero {
+  background: linear-gradient(135deg, #2c3e6d, #1a2a4f);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+.about-hero h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 80px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-content img {
+  width: 50%;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.about-text h2 {
+  color: #2c3e6d;
+  margin: 20px 0 10px;
+}
+.about-stats {
+  display: flex;
+  justify-content: space-around;
+  background: #f8f9fc;
+  padding: 60px;
+  text-align: center;
+}
+.about-stats div svg {
+  font-size: 40px;
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+.stat-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  .about-content img {
+    width: 100%;
+  }
+  .about-stats {
+    flex-direction: column;
+    gap: 30px;
+  }
 }

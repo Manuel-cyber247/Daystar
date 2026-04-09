@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+// File: components/Navbar.jsx (without react-icons)
+import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
 import "./navbar.css";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <nav className="nav">
-      <h1 className="logo">CarePlus</h1>
-      <div className="links">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/contact">Contact</Link>
+      <div className="logo">
+        <span className="logo-icon">❤️</span>
+        <h1>Daystar Specialist Hospital & Maternity</h1>
       </div>
+      <div className={`links ${menuOpen ? "open" : ""}`}>
+       <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
+        <NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink>
+        <NavLink to="/services" onClick={() => setMenuOpen(false)}>Services</NavLink>
+        <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
+      </div>
+      <button className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? "✕" : "☰"}
+      </button>
     </nav>
   );
 }

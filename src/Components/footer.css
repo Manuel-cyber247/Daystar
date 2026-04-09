@@ -1,11 +1,69 @@
+/* File: components/footer.css */
 .footer {
-  text-align: center;
-  padding: 20px;
-  background: #0a3d62;
-  color: white;
+  background: #0a1a2f;
+  color: #ecf0f1;
+  padding: 50px 60px 20px;
+  margin-top: 60px;
 }
-@media(max-width:768px){
-  .hero { flex-direction: column; text-align: center; }
-  .features { flex-direction: column; gap: 20px; }
-  .doctor-grid { flex-direction: column; }
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-section h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #e74c3c;
+}
+.footer-section h4 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.footer-section p, .footer-section ul {
+  font-size: 14px;
+  line-height: 1.8;
+  opacity: 0.8;
+}
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-section li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+.social-icons svg {
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 18px;
+}
+
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+}
+.footer-bottom svg {
+  color: #e74c3c;
+  margin: 0 5px;
+}
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 25px 20px;
+  }
+  .footer-content {
+    gap: 30px;
+  }
 }
