@@ -1,4 +1,4 @@
-/* File: pages/home.css */
+/* File: pages/home.css (updated with better image handling) */
 .hero {
   position: relative;
   height: 85vh;
@@ -30,6 +30,8 @@
   text-align: center;
   color: white;
   z-index: 2;
+  width: 90%;
+  max-width: 800px;
 }
 .hero-content h2 {
   font-size: 52px;
@@ -73,6 +75,7 @@
   gap: 30px;
   padding: 80px 60px;
   background: #f8f9fc;
+  flex-wrap: wrap;
 }
 .card {
   background: white;
@@ -96,6 +99,11 @@
   margin-bottom: 12px;
   color: #2c3e6d;
 }
+.card p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
 .stats {
   display: flex;
   justify-content: space-around;
@@ -103,10 +111,16 @@
   color: white;
   padding: 60px;
   text-align: center;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 .stat h3 {
   font-size: 42px;
   margin-bottom: 10px;
+}
+.stat p {
+  font-size: 16px;
+  opacity: 0.9;
 }
 .doctors {
   text-align: center;
@@ -132,37 +146,50 @@
   border-radius: 20px;
   text-align: center;
   transition: 0.3s;
-  width: 250px;
+  width: 280px;
 }
 .doctor:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
 .doctor img {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 15px;
   border: 3px solid #e74c3c;
 }
 .doctor h4 {
-  font-size: 20px;
-  margin-bottom: 5px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #2c3e6d;
 }
 .doctor p {
   color: #e74c3c;
   font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 .doctor-social {
   margin-top: 15px;
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
 }
 .doctor-social span {
   cursor: pointer;
-  font-size: 18px;
+  font-size: 12px;
+  color: #555;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.doctor-social span:hover {
+  color: #e74c3c;
 }
 .testimonials {
   background: linear-gradient(135deg, #f8f9fc, #eef2f7);
@@ -220,9 +247,11 @@
 }
 @media (max-width: 768px) {
   .hero-content h2 { font-size: 32px; }
+  .hero-content p { font-size: 16px; }
   .features { flex-direction: column; align-items: center; padding: 60px 20px; }
   .stats { flex-direction: column; gap: 30px; }
   .doctors { padding: 60px 20px; }
+  .doctor { width: 100%; max-width: 300px; }
   .testimonials { padding: 60px 20px; }
   .appointment-banner { flex-direction: column; text-align: center; }
 }

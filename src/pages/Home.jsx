@@ -1,14 +1,35 @@
-// File: pages/Home.jsx (without react-icons)
+// File: pages/Home.jsx (with custom image support)
 import { useState, useEffect } from "react";
 import "./home.css";
 
+// ============================================
+// IMPORT YOUR CUSTOM IMAGES HERE
+// ============================================
+// Hero Slider Images - Add your own images
+import heroImg1 from "../assets/doctor.jpg";
+import heroImg2 from "../assets/daystar-one.jpeg";
+import heroImg3 from "../assets/main-branch.jpg";
+
+// Doctor Images - Add your own doctor photos
+import doctor4Img from "../assets/doctor1.png";
+import doctor2Img from "../assets/doctor2.jpg";
+import doctor3Img from "../assets/doctor3.jpg";
+import doctor1Img from "../assets/doctor4.jpg";
+
+// If you don't have images yet, use these placeholders or URL strings:
+// const heroImg1 = "https://images.unsplash.com/photo-1586773860418-d37222d8fce3";
+// const heroImg2 = "https://images.unsplash.com/photo-1576091160550-2173dba999ef";
+// const heroImg3 = "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d";
+// const doctor1Img = "https://randomuser.me/api/portraits/men/32.jpg";
+// const doctor2Img = "https://randomuser.me/api/portraits/men/45.jpg";
+// const doctor3Img = "https://randomuser.me/api/portraits/men/50.jpg";
+// const doctor4Img = "https://randomuser.me/api/portraits/women/44.jpg";
+// ============================================
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = [
-    "https://images.unsplash.com/photo-1586773860418-d37222d8fce3",
-    "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
-    "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d"
-  ];
+  
+  const slides = [heroImg1, heroImg2, heroImg3];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,7 +46,6 @@ export default function Home() {
         <div className="hero-content">
           <h2>World-Class Healthcare</h2>
           <p>Trusted medical services with modern technology and compassionate care</p>
-          
         </div>
       </section>
 
@@ -33,7 +53,7 @@ export default function Home() {
         <div className="card">
           <div className="card-icon">🚑</div>
           <h3>24/7 Emergency</h3>
-        
+          <p>Immediate response with advanced life support</p>
         </div>
         <div className="card">
           <div className="card-icon">👨‍⚕️</div>
@@ -49,14 +69,9 @@ export default function Home() {
 
       <section className="stats">
         <div className="stat">
-          <h3>50K+</h3>
+          <h3>10K+</h3>
           <p>Happy Patients</p>
         </div>
-                <div className="stat">
-          <h3>2 Branches</h3>
-          <p>To suit your comfort</p>
-        </div>
-
         <div className="stat">
           <h3>98%</h3>
           <p>Satisfaction Rate</p>
@@ -71,36 +86,43 @@ export default function Home() {
         <h2>Meet Our <span>Specialists</span></h2>
         <div className="doctor-grid">
           <div className="doctor">
-            <img src="" />
+            <img src={doctor1Img} alt="Dr. Chinyelu Uchenna Ufoaroh" />
             <h4>Dr. Chinyelu Uchenna Ufoaroh</h4>
-            <p>Physician</p>
+            <p>Internal Physician <br />Pulmonology/Chest Medicine</p>
             <div className="doctor-social">
-              <span>✉️ufoarohcu@gmail.com</span>
-              <span>📞08039331585</span>
+              <span>✉️ ufoarohcu@gmail.com</span>
+              <span>📞 08039331585</span>
             </div>
           </div>
           <div className="doctor">
-            <img src="" />
-            <h4>Dr. Sarah Mitchell</h4>
-            <p>Neurologist</p>
+            <img src={doctor2Img} alt="Dr. Modekwe Victor Ifeanyichukwu" />
+            <h4>Dr. Modekwe Victor Ifeanyichukwu</h4>
+            <p>Paediatric Surgeon</p>
             <div className="doctor-social">
-              <span>✉️</span>
-              <span>📞</span>
+              <span>✉️ victor@email.com</span>
+              <span>📞 08012345678</span>
             </div>
           </div>
           <div className="doctor">
-            <img src="" />
-            <h4>Dr. Michael Chen</h4>
-            <p>Orthopedic Surgeon</p>
+            <img src={doctor3Img} alt="Dr. Nwankwo Ezekiel Uchechukwu" />
+            <h4>Dr. Nwankwo Ezekiel Uchechukwu</h4>
+            <p>Plastic Surgeon</p>
             <div className="doctor-social">
-              <span>✉️</span>
-              <span>📞</span>
+              <span>✉️ ezekiel@email.com</span>
+              <span>📞 08012345678</span>
+            </div>
+          </div>
+          <div className="doctor">
+            <img src={doctor4Img} alt="Dr. Somto Celestine Ngonnadi" />
+            <h4>Dr. Somto Celestine Ngonnadi</h4>
+            <p>Paediatrics</p>
+            <div className="doctor-social">
+              <span>✉️ somto@email.com</span>
+              <span>📞 08012345678</span>
             </div>
           </div>
         </div>
       </section>
-
-
     </div>
   );
 }

@@ -8,8 +8,8 @@ export default function Footer() {
       <div className="footer-content">
         <div className="footer-section">
           <h3>Daystar Specialist Hospital & Maternity</h3>
-          <p>Providing compassionate, world-class healthcare since 1995. </p>
-          <h2>Your health, our priority.</h2>
+          <p>Providing compassionate, world-class healthcare since 2016. </p>
+          <h2>By His stripes we are healed.</h2>
           <div className="social-icons">
           </div>
         </div>
@@ -17,9 +17,10 @@ export default function Footer() {
         <div className="footer-section">
           <h4>Contact Info</h4>
           <ul>
-            <li>📍 NO. 10 DAYSTAR STREET, MGBEKE AMUCHE, NKWELLE-EZUNAKA, OYI, ANAMBRA STATE</li>
+            <li>📍 Main Branch: NO. 10 Daystar Street, Mgbeke Amuche, Nkwelle-Ezunanka, Oyi, Anambra State</li>
+            <li>📍 Annex: 17A Ezeudu Street Umudioka, Awka, Anambra State</li>
             <li>📞 +234 8039331585</li>
-            <li>✉️ info@careplus.com</li>
+            <li>✉️ daystarspecialist@gmail.com</li>
           </ul>
         </div>
         <div className="footer-section">

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./contact.css";
 // Import your custom images here
-import mainBranchImg from "../assets/main-branch.jpg";
+import mainBranchImg from "../assets/daystar-two.jpeg";
 import annexBranchImg from "../assets/doctor.jpg";
 
 export default function Contact() {
@@ -12,17 +12,17 @@ export default function Contact() {
     main: {
       name: "Daystar Specialist Hospital & Maternity",
       address: "NO. 10 DAYSTAR STREET, MGBEKE AMUCHE, NKWELLE-EZUNAKA, OYI, ANAMBRA STATE",
-      phone: "+(234) 8039331585",
-      email: "main@careplus.com",
+      phone: "+234 906 382 1361",
+      email: "daystarspecialist@gmail.com",
       hours: "24/7 Emergency Services",
       mapLink: "https://www.google.com/maps/place/Day+star+hospital/@6.2056056,6.8621718,15z/data=!4m10!1m2!2m1!1sdaystar+nkwelle+ezunanka!3m6!1s0x10438f486a12d735:0xee71c43465de74ee!8m2!3d6.2055455!4d6.8622905!15sChdkYXlzdGFyIG5rd2VsbGUgZXp1bmFrYZIBCGhvc3BpdGFs4AEA!16s%2Fg%2F11jp08p3jl?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
       image: mainBranchImg
     },
     west: {
       name: "Daystar Specialist Hospital & Maternity",
-      address: "24 Emenike Okoye Avenue",
-      phone: "+(234) 704356733",
-      email: "west@careplus.com",
+      address: "17A EZEUDU STREET UMUDIOKA, AWKA, ANAMBRA STATE",
+      phone: "+234 706 285 4744",
+      email: "daystarspecialist@gmail.com",
       hours: "24/7 Emergency Services",
       mapLink: "https://www.google.com/maps/place/Daystar+specialist+hospital+and+Maternity/@6.2149345,7.0710193,19z/data=!4m14!1m7!3m6!1s0x104383403e8160b3:0x1b117dcec044781!2sDaystar+specialist+hospital+and+Maternity!8m2!3d6.2150318!4d7.0714646!16s%2Fg%2F11h3nhgk5v!3m5!1s0x104383403e8160b3:0x1b117dcec044781!8m2!3d6.2150318!4d7.0714646!16s%2Fg%2F11h3nhgk5v?entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D",
       image: annexBranchImg
@@ -108,7 +108,7 @@ export default function Contact() {
           <div className="branch-card" onClick={() => setSelectedBranch("west")}>
             <div className="branch-card-icon">🌆</div>
             <h4>Annex Branch</h4>
-            <p>Emenike Okoye Avenue</p>
+            <p>Awka</p>
             <span className="branch-card-hours">24/7 Open</span>
           </div>
         </div>
