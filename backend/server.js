@@ -175,10 +175,3 @@ app.post('/api/send-message', async (req, res) => {
   }
 });
 
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
-  console.log(`📧 Test endpoint: http://localhost:${PORT}/api/test`);
-  console.log(`📨 Send message: http://localhost:${PORT}/api/send-message`);
-});
