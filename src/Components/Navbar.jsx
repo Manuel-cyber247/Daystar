@@ -23,6 +23,7 @@ export default function Navbar() {
         <NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink>
         <NavLink to="/services" onClick={() => setMenuOpen(false)}>Services</NavLink>
         <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
+        <NavLink to="/consultation" onClick={() => setMenuOpen(false)}>Send Message</NavLink>
       </div>
       <button className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? "✕" : "☰"}

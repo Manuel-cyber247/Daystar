@@ -1,27 +1,30 @@
-/* File: pages/home.css (updated with better image handling) */
 .hero {
   position: relative;
   height: 85vh;
   overflow: hidden;
 }
+
 .hero-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: zoom 8s infinite alternate;
+  animation: zoom 10s infinite alternate;
 }
+
 @keyframes zoom {
   0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
+  100% { transform: scale(1.08); }
 }
+
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+  background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,105,92,0.4), rgba(38,166,154,0.3), rgba(0,0,0,0.5));
 }
+
 .hero-content {
   position: absolute;
   top: 50%;
@@ -33,32 +36,25 @@
   width: 90%;
   max-width: 800px;
 }
+
 .hero-content h2 {
-  font-size: 52px;
+  font-size: 58px;
   margin-bottom: 15px;
   animation: fadeInUp 1s ease;
+  background: linear-gradient(135deg, #fff, #b2dfdb, #80cbc4, #4db6ac, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
 }
+
 .hero-content p {
-  font-size: 20px;
+  font-size: 24px;
   margin-bottom: 25px;
   animation: fadeInUp 1s ease 0.2s both;
+  color: #b2dfdb;
+  font-weight: 500;
 }
-.cta-btn {
-  background: #e74c3c;
-  color: white;
-  border: none;
-  padding: 14px 32px;
-  font-size: 18px;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: 0.3s;
-  animation: fadeInUp 1s ease 0.4s both;
-}
-.cta-btn:hover {
-  background: #c0392b;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -69,115 +65,202 @@
     transform: translateY(0);
   }
 }
+
 .features {
   display: flex;
   justify-content: center;
   gap: 30px;
   padding: 80px 60px;
-  background: #f8f9fc;
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2, #e0f7fa);
   flex-wrap: wrap;
 }
+
 .card {
   background: white;
-  padding: 35px 25px;
-  border-radius: 20px;
+  padding: 40px 30px;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: 0.4s;
   width: 280px;
+  position: relative;
+  overflow: hidden;
 }
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #26a69a, #4db6ac, #80cbc4);
+  transition: 0.4s;
+}
+
+.card:hover::before {
+  left: 0;
+}
+
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(38, 166, 154, 0.2);
 }
+
 .card-icon {
-  font-size: 50px;
-  color: #e74c3c;
+  font-size: 65px;
   margin-bottom: 20px;
+  display: inline-block;
+  animation: bounce 2s infinite;
 }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 .card h3 {
   margin-bottom: 12px;
-  color: #2c3e6d;
+  background: linear-gradient(135deg, #004d40, #00695c, #00897b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+  font-weight: 700;
 }
+
 .card p {
-  color: #666;
+  color: #555;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
+
 .stats {
   display: flex;
   justify-content: space-around;
-  background: linear-gradient(135deg, #2c3e6d, #1a2a4f);
+  background: linear-gradient(135deg, #004d40, #00695c, #00897b, #26a69a);
   color: white;
-  padding: 60px;
+  padding: 70px 60px;
   text-align: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 40px;
 }
+
 .stat h3 {
-  font-size: 42px;
+  font-size: 52px;
   margin-bottom: 10px;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  animation: countPulse 2s ease infinite;
+  color: #b2dfdb;
 }
+
+@keyframes countPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 .stat p {
-  font-size: 16px;
-  opacity: 0.9;
+  font-size: 18px;
+  opacity: 0.95;
+  letter-spacing: 1px;
 }
+
 .doctors {
   text-align: center;
   padding: 80px 60px;
-  background: white;
+  background: linear-gradient(135deg, #ffffff, #e0f7fa, #f0fdfa);
 }
+
 .doctors h2 {
-  font-size: 36px;
+  font-size: 48px;
   margin-bottom: 50px;
+  background: linear-gradient(135deg, #004d40, #00695c, #00897b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
 }
+
 .doctors h2 span {
-  color: #e74c3c;
+  background: linear-gradient(135deg, #26a69a, #4db6ac, #80cbc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 .doctor-grid {
   display: flex;
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
 }
+
 .doctor {
-  background: #f8f9fc;
+  background: white;
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 25px;
   text-align: center;
-  transition: 0.3s;
+  transition: 0.4s;
   width: 280px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
 }
+
+.doctor::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: linear-gradient(135deg, rgba(38,166,154,0.05), rgba(128,203,196,0.05));
+  transition: 0.4s;
+}
+
+.doctor:hover::after {
+  height: 100%;
+}
+
 .doctor:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(38, 166, 154, 0.15);
 }
+
 .doctor img {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 15px;
-  border: 3px solid #e74c3c;
+  border: 4px solid transparent;
+  background: linear-gradient(135deg, #26a69a, #4db6ac);
+  padding: 3px;
+  transition: 0.3s;
 }
+
+.doctor:hover img {
+  transform: scale(1.05);
+}
+
 .doctor h4 {
   font-size: 18px;
   margin-bottom: 8px;
-  color: #2c3e6d;
+  color: #00695c;
+  font-weight: 800;
 }
+
 .doctor p {
-  color: #e74c3c;
-  font-weight: 500;
+  color: #26a69a;
+  font-weight: 700;
   font-size: 14px;
   margin-bottom: 10px;
 }
+
 .doctor-social {
   margin-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 12px;
 }
+
 .doctor-social span {
   cursor: pointer;
   font-size: 12px;
@@ -187,71 +270,22 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  padding: 5px;
+  border-radius: 10px;
 }
+
 .doctor-social span:hover {
-  color: #e74c3c;
-}
-.testimonials {
-  background: linear-gradient(135deg, #f8f9fc, #eef2f7);
-  padding: 80px 60px;
-  text-align: center;
-}
-.testimonials h2 {
-  font-size: 36px;
-  margin-bottom: 50px;
-}
-.testimonial-slider {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-.testimonial {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  width: 350px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-.quote-icon {
-  font-size: 40px;
-  color: #e74c3c;
-  margin-bottom: 15px;
-}
-.testimonial p {
-  font-style: italic;
-  margin-bottom: 20px;
-}
-.appointment-banner {
-  background: #e74c3c;
+  background: linear-gradient(135deg, #26a69a, #00695c);
   color: white;
-  padding: 50px;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  transform: translateX(5px);
 }
-.appointment-banner button {
-  background: white;
-  color: #e74c3c;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+
 @media (max-width: 768px) {
-  .hero-content h2 { font-size: 32px; }
+  .hero-content h2 { font-size: 36px; }
   .hero-content p { font-size: 16px; }
   .features { flex-direction: column; align-items: center; padding: 60px 20px; }
-  .stats { flex-direction: column; gap: 30px; }
+  .stats { flex-direction: column; gap: 30px; padding: 50px 30px; }
   .doctors { padding: 60px 20px; }
+  .doctors h2 { font-size: 32px; }
   .doctor { width: 100%; max-width: 300px; }
-  .testimonials { padding: 60px 20px; }
-  .appointment-banner { flex-direction: column; text-align: center; }
 }

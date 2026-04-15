@@ -12,8 +12,8 @@ import heroImg3 from "../assets/main-branch.jpg";
 
 // Doctor Images - Add your own doctor photos
 import doctor4Img from "../assets/doctor1.png";
-import doctor2Img from "../assets/doctor2.jpg";
-import doctor3Img from "../assets/doctor3.jpg";
+import doctor2Img from "../assets/doctor2.jpeg";
+import doctor3Img from "../assets/doctor3.jpeg";
 import doctor1Img from "../assets/doctor4.jpg";
 
 // If you don't have images yet, use these placeholders or URL strings:
@@ -97,10 +97,10 @@ export default function Home() {
           <div className="doctor">
             <img src={doctor2Img} alt="Dr. Modekwe Victor Ifeanyichukwu" />
             <h4>Dr. Modekwe Victor Ifeanyichukwu</h4>
-            <p>Paediatric Surgeon</p>
+            <p>Paediatric and General Surgeon</p>
             <div className="doctor-social">
-              <span>✉️ victor@email.com</span>
-              <span>📞 08012345678</span>
+              <span>✉️ victormodekwe@yahoo.com</span>
+              <span>📞 08036083266</span>
             </div>
           </div>
           <div className="doctor">

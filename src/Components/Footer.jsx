@@ -19,7 +19,7 @@ export default function Footer() {
           <ul>
             <li>📍 Main Branch: NO. 10 Daystar Street, Mgbeke Amuche, Nkwelle-Ezunanka, Oyi, Anambra State</li>
             <li>📍 Annex: 17A Ezeudu Street Umudioka, Awka, Anambra State</li>
-            <li>📞 +234 8039331585</li>
+            <li>📞 +234 906 382 1361  +234 706 285 4744</li>
             <li>✉️ daystarspecialist@gmail.com</li>
           </ul>
         </div>
