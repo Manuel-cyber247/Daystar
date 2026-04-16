@@ -28,10 +28,7 @@ const handleSubmit = async (e) => {
   setError('');
 
   try {
-    // This works on both localhost and Vercel
-    const apiUrl = '/api/send-message';
-    
-    const response = await fetch(apiUrl, {
+    const response = await fetch('/api/send-message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,7 +36,15 @@ const handleSubmit = async (e) => {
       body: JSON.stringify(formData),
     });
 
+    // Check if response is ok
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Response error:', response.status, errorText);
+      throw new Error(`Server responded with ${response.status}`);
+    }
+
     const data = await response.json();
+    console.log('Response data:', data);
 
     if (data.success) {
       setSuccess(data.message);
@@ -54,8 +59,8 @@ const handleSubmit = async (e) => {
       setError(data.message);
     }
   } catch (err) {
-    console.error('Error:', err);
-    setError('Network error. Please try again or call us directly.');
+    console.error('Fetch error details:', err);
+    setError('Network error. Please try again or call us directly');
   } finally {
     setLoading(false);
   }
