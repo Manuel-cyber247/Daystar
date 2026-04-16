@@ -1,6 +1,5 @@
-// SIMPLE WORKING API - No dependencies needed
-export default async function handler(req, res) {
-  // Set CORS headers
+export default function handler(req, res) {
+  // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -10,47 +9,26 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // Handle GET request
+  // Handle GET
   if (req.method === 'GET') {
-    return res.status(200).json({
-      success: true,
-      message: 'API is working!',
-      time: new Date().toISOString()
+    return res.status(200).json({ 
+      success: true, 
+      message: 'Send message API is working! Use POST to send messages.' 
     });
   }
 
-  // Handle POST request
+  // Handle POST
   if (req.method === 'POST') {
-    try {
-      console.log('Received POST data:', req.body);
-      
-      const { name, email, phone, subject, message } = req.body || {};
-
-      // Simple validation
-      if (!name || !email || !subject || !message) {
-        return res.status(400).json({
-          success: false,
-          error: 'Missing required fields: name, email, subject, message'
-        });
-      }
-
-      // Return success for now (without email)
-      return res.status(200).json({
-        success: true,
-        message: 'Message received successfully! We will contact you soon.',
-        received: { name, email, phone, subject, message }
-      });
-
-    } catch (error) {
-      console.error('Error in POST handler:', error);
-      return res.status(500).json({
-        success: false,
-        error: 'Internal server error',
-        details: error.message
-      });
-    }
+    const { name, email, phone, subject, message } = req.body;
+    
+    console.log('Received:', { name, email, phone, subject, message });
+    
+    return res.status(200).json({ 
+      success: true, 
+      message: 'Message received! We will contact you soon.',
+      received: { name, email, subject }
+    });
   }
 
-  // Method not allowed
-  return res.status(405).json({ success: false, error: 'Method not allowed' });
+  return res.status(405).json({ error: 'Method not allowed' });
 }

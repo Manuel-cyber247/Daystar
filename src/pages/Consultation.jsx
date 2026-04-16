@@ -28,35 +28,19 @@ const handleSubmit = async (e) => {
   setError('');
 
   try {
-    const formDataToSend = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      subject: formData.subject,
-      message: formData.message
-    };
-
-    console.log('Sending:', formDataToSend);
-
-    const response = await fetch('https://daystarlovat.vercel.app/api/send-message', {
+    // Use relative URL - this works on Vercel
+    const response = await fetch('/api/send-message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formDataToSend),
+      body: JSON.stringify(formData),
     });
 
-    console.log('Response status:', response.status);
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
     const data = await response.json();
-    console.log('Response data:', data);
-
+    
     if (data.success) {
-      setSuccess('Your message has been sent successfully!');
+      setSuccess(data.message);
       setFormData({
         name: '',
         email: '',
@@ -69,7 +53,7 @@ const handleSubmit = async (e) => {
     }
   } catch (err) {
     console.error('Error:', err);
-    setError('Unable to send message. Please call us directly.');
+    setError('Network error. Please call us directly.');
   } finally {
     setLoading(false);
   }
