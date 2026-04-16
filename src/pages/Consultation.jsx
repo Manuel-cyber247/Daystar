@@ -28,23 +28,35 @@ const handleSubmit = async (e) => {
   setError('');
 
   try {
-    console.log('Sending form data:', formData);
-    
-    const response = await fetch('/api/send-message', {
+    const formDataToSend = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message
+    };
+
+    console.log('Sending:', formDataToSend);
+
+    const response = await fetch('https://daystarlovat.vercel.app/api/send-message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formDataToSend),
     });
 
     console.log('Response status:', response.status);
-    
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
     const data = await response.json();
     console.log('Response data:', data);
 
     if (data.success) {
-      setSuccess(data.message);
+      setSuccess('Your message has been sent successfully!');
       setFormData({
         name: '',
         email: '',
@@ -53,11 +65,11 @@ const handleSubmit = async (e) => {
         message: ''
       });
     } else {
-      setError(data.message);
+      setError(data.error || 'Failed to send message');
     }
   } catch (err) {
-    console.error('Fetch error:', err);
-    setError('Network error. Please call us directly at +234 906 382 1361');
+    console.error('Error:', err);
+    setError('Unable to send message. Please call us directly.');
   } finally {
     setLoading(false);
   }
