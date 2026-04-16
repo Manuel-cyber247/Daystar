@@ -8,6 +8,22 @@
       "dest": "/api/send-message.js"
     },
     {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/main-(.*)\\.js",
+      "dest": "/main-$1.js"
+    },
+    {
+      "src": "/index-(.*)\\.css",
+      "dest": "/index-$1.css"
+    },
+    {
+      "src": "/(.*)\\.(js|css|png|jpg|jpeg|gif|svg|ico|json)$",
+      "dest": "/$1.$2"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
