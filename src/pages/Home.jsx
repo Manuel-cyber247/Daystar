@@ -14,7 +14,7 @@ import heroImg3 from "../assets/main-branch.jpg";
 import doctor4Img from "../assets/doctor1.png";
 import doctor2Img from "../assets/doctor2.jpeg";
 import doctor3Img from "../assets/doctor3.jpeg";
-import doctor1Img from "../assets/doctor4.jpg";
+import doctor1Img from "../assets/doctor1.jpeg";
 
 // If you don't have images yet, use these placeholders or URL strings:
 // const heroImg1 = "https://images.unsplash.com/photo-1586773860418-d37222d8fce3";
@@ -90,7 +90,7 @@ export default function Home() {
             <h4>Dr. Chinyelu Uchenna Ufoaroh</h4>
             <p>Internal Physician <br />Pulmonology/Chest Medicine</p>
             <div className="doctor-social">
-              <span>✉️ ufoarohcu@gmail.com</span>
+              <span>✉️ ufoarohcu@yahoo.com</span>
               <span>📞 08039331585</span>
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function Home() {
             <h4>Dr. Somto Celestine Ngonnadi</h4>
             <p>Paediatrics</p>
             <div className="doctor-social">
-              <span>✉️ somto@email.com</span>
+              <span>✉️ somtongonadi@email.com</span>
               <span>📞 08012345678</span>
             </div>
           </div>

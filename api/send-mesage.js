@@ -4,9 +4,9 @@ import nodemailer from 'nodemailer';
 
 const app = express();
 
-// CORS configuration
+// CORS configuration - allow your Vercel frontend
 app.use(cors({
-  origin: '*',
+  origin: ['https://daystar.vercel.app', 'http://localhost:3000', 'http://localhost:5173'],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
@@ -23,7 +23,16 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// POST endpoint for sending messages
+// Test endpoint (GET)
+app.get('/api/test', (req, res) => {
+  res.json({ 
+    success: true,
+    message: 'Backend is working on Vercel!',
+    environment: 'production'
+  });
+});
+
+// Send message endpoint (POST)
 app.post('/api/send-message', async (req, res) => {
   const { name, email, phone, subject, message } = req.body;
 
@@ -42,12 +51,13 @@ app.post('/api/send-message', async (req, res) => {
       subject: `📨 New Patient Message: ${subject}`,
       html: `
         <h2>New Message from ${name}</h2>
-        <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
         <p><strong>Subject:</strong> ${subject}</p>
         <p><strong>Message:</strong></p>
         <p>${message}</p>
+        <hr>
+        <p><small>Sent from Daystar Specialist Hospital Website</small></p>
       `
     };
 
@@ -58,10 +68,13 @@ app.post('/api/send-message', async (req, res) => {
       subject: `Thank you for contacting Daystar Specialist Hospital`,
       html: `
         <h2>Dear ${name},</h2>
-        <p>Thank you for contacting Daystar Specialist Hospital. We will respond within 24 hours.</p>
-        <p>For emergencies, please call: <strong>+(234) 8039331585</strong></p>
+        <p>Thank you for contacting Daystar Specialist Hospital. We have received your message and will respond within 24 hours.</p>
+        <p><strong>Your message:</strong> "${message.substring(0, 200)}"</p>
+        <p>For emergencies, please call: <strong>+234 906 382 1361</strong></p>
         <br>
-        <p>Best regards,<br>Daystar Specialist Hospital Team</p>
+        <p>Best regards,</p>
+        <p><strong>Daystar Specialist Hospital Team</strong></p>
+        <p><em>By His Stripes We Are Healed</em></p>
       `
     };
 
@@ -70,21 +83,16 @@ app.post('/api/send-message', async (req, res) => {
 
     res.status(200).json({ 
       success: true, 
-      message: 'Your message has been sent successfully!' 
+      message: 'Your message has been sent successfully! Our team will respond within 24 hours.' 
     });
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error sending email:', error);
     res.status(500).json({ 
       success: false, 
-      message: 'Failed to send message. Please call us directly.' 
+      message: 'Failed to send message. Please call us directly at +234 906 382 1361' 
     });
   }
 });
 
-// GET endpoint for testing
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend is working on Vercel!' });
-});
-
-// Export the Express app for Vercel
+// Export for Vercel (NO app.listen() here!)
 export default app;

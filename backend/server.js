@@ -2,8 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 dotenv.config();
 
@@ -19,27 +17,17 @@ app.use(cors({
 
 app.use(express.json());
 
-// Test endpoint to check if backend is running
+// Test endpoint
 app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend is working!' });
-});
-
-// Create email transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
-
-// Verify email configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('Email configuration error:', error);
-  } else {
-    console.log('Email server is ready to send messages');
-  }
+  res.json({ 
+    success: true,
+    message: 'Backend is working!',
+    port: 5000,
+    endpoints: {
+      test: 'GET /api/test',
+      sendMessage: 'POST /api/send-message'
+    }
+  });
 });
 
 // Send message endpoint
@@ -51,11 +39,31 @@ app.post('/api/send-message', async (req, res) => {
   if (!name || !email || !subject || !message) {
     return res.status(400).json({ 
       success: false, 
-      message: 'Please fill in all required fields.' 
+      message: 'Please fill in all required fields: name, email, subject, message' 
+    });
+  }
+
+  // Check if email credentials are configured
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error('Email credentials not configured');
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Email service not configured. Please call us directly.' 
     });
   }
 
   try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    // Verify transporter
+    await transporter.verify();
+
     // Email to hospital admin
     const adminMailOptions = {
       from: process.env.EMAIL_USER,
@@ -66,47 +74,24 @@ app.post('/api/send-message', async (req, res) => {
         <html>
         <head>
           <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #f0fdfa; border-radius: 10px; }
-            .header { background: linear-gradient(135deg, #004d40, #00695c); color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }
-            .content { padding: 20px; background: white; border-radius: 10px; margin-top: 20px; }
-            .field { margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px; }
-            .label { font-weight: bold; color: #00695c; font-size: 14px; }
-            .value { margin-top: 5px; color: #333; }
-            .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+            body { font-family: Arial, sans-serif; }
+            .container { padding: 20px; background: #f0fdfa; }
+            .header { background: #004d40; color: white; padding: 10px; }
+            .content { padding: 20px; background: white; }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <h2>🏥 Daystar Specialist Hospital</h2>
-              <p>New Patient Consultation Message</p>
+              <h2>Daystar Specialist Hospital</h2>
             </div>
             <div class="content">
-              <div class="field">
-                <div class="label">👤 Patient Name:</div>
-                <div class="value">${name}</div>
-              </div>
-              <div class="field">
-                <div class="label">📧 Email:</div>
-                <div class="value">${email}</div>
-              </div>
-              <div class="field">
-                <div class="label">📞 Phone:</div>
-                <div class="value">${phone || 'Not provided'}</div>
-              </div>
-              <div class="field">
-                <div class="label">📝 Subject:</div>
-                <div class="value">${subject}</div>
-              </div>
-              <div class="field">
-                <div class="label">💬 Message:</div>
-                <div class="value">${message}</div>
-              </div>
-            </div>
-            <div class="footer">
-              <p>This message was sent from Daystar Specialist Hospital website.</p>
-              <p>Please respond to this patient within 24 hours.</p>
+              <h3>New Message from ${name}</h3>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+              <p><strong>Subject:</strong> ${subject}</p>
+              <p><strong>Message:</strong></p>
+              <p>${message}</p>
             </div>
           </div>
         </body>
@@ -124,32 +109,26 @@ app.post('/api/send-message', async (req, res) => {
         <html>
         <head>
           <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #f0fdfa; border-radius: 10px; }
-            .header { background: linear-gradient(135deg, #004d40, #00695c); color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }
-            .content { padding: 20px; background: white; border-radius: 10px; margin-top: 20px; }
-            .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
-            .button { display: inline-block; padding: 10px 20px; background: #26a69a; color: white; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+            body { font-family: Arial, sans-serif; }
+            .container { padding: 20px; background: #f0fdfa; }
+            .header { background: #004d40; color: white; padding: 10px; }
+            .content { padding: 20px; background: white; }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <h2>🏥 Daystar Specialist Hospital</h2>
+              <h2>Daystar Specialist Hospital</h2>
               <p>By His Stripes We Are Healed</p>
             </div>
             <div class="content">
               <h3>Dear ${name},</h3>
-              <p>Thank you for reaching out to Daystar Specialist Hospital. We have received your message and our medical team will review it shortly.</p>
-              <p><strong>Your message:</strong> "${message.substring(0, 100)}..."</p>
-              <p>We will get back to you within <strong>24 hours</strong> via email or phone.</p>
-              <p>If you need immediate medical assistance, please call our emergency line:</p>
-              <p><strong>📞 Emergency: +(234) 8039331585</strong></p>
-              <a href="https://daystar-hospital.vercel.app" class="button">Visit Our Website</a>
-            </div>
-            <div class="footer">
-              <p>© 2026 Daystar Specialist Hospital. All rights reserved.</p>
-              <p>NO. 10 DAYSTAR STREET, MGBEKE AMUCHE, NKWELLE-EZUNAKA, OYI, ANAMBRA STATE</p>
+              <p>Thank you for contacting Daystar Specialist Hospital. We have received your message and will respond within 24 hours.</p>
+              <p><strong>Your message:</strong> "${message.substring(0, 200)}"</p>
+              <p>For emergencies, please call: <strong>+234 906 382 1361</strong></p>
+              <br>
+              <p>Best regards,</p>
+              <p><strong>Daystar Specialist Hospital Team</strong></p>
             </div>
           </div>
         </body>
@@ -157,7 +136,6 @@ app.post('/api/send-message', async (req, res) => {
       `
     };
 
-    // Send both emails
     await transporter.sendMail(adminMailOptions);
     await transporter.sendMail(patientMailOptions);
 
@@ -170,8 +148,15 @@ app.post('/api/send-message', async (req, res) => {
     console.error('Error sending email:', error);
     res.status(500).json({ 
       success: false, 
-      message: 'Failed to send message. Please call us directly at +(234) 8039331585' 
+      message: 'Failed to send message. Please call us directly at +234 906 382 1361' 
     });
   }
 });
 
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`📧 Test endpoint: http://localhost:${PORT}/api/test`);
+  console.log(`📨 Send message: POST http://localhost:${PORT}/api/send-message`);
+});

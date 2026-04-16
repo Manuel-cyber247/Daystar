@@ -21,41 +21,45 @@ export default function Consultation() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess('');
-    setError('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setSuccess('');
+  setError('');
 
-    try {
-const response = await fetch('/api/send-message', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(formData),
-});
+  try {
+    // This works on both localhost and Vercel
+    const apiUrl = '/api/send-message';
+    
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        setSuccess(data.message);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        });
-      } else {
-        setError(data.message);
-      }
-    } catch (err) {
-      setError('Network error. Please try again or call us directly.');
-    } finally {
-      setLoading(false);
+    if (data.success) {
+      setSuccess(data.message);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } else {
+      setError(data.message);
     }
-  };
+  } catch (err) {
+    console.error('Error:', err);
+    setError('Network error. Please try again or call us directly.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="consultation-page">
