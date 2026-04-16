@@ -1,8 +1,27 @@
 {
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/send-message.js"
+    },
+    {
+      "src": "/assets/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*)\\.(js|css)$",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "dest": "/$1.$2"
     },
     {
       "src": "/(.*)",
