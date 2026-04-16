@@ -28,6 +28,8 @@ const handleSubmit = async (e) => {
   setError('');
 
   try {
+    console.log('Sending form data:', formData);
+    
     const response = await fetch('/api/send-message', {
       method: 'POST',
       headers: {
@@ -36,13 +38,8 @@ const handleSubmit = async (e) => {
       body: JSON.stringify(formData),
     });
 
-    // Check if response is ok
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Response error:', response.status, errorText);
-      throw new Error(`Server responded with ${response.status}`);
-    }
-
+    console.log('Response status:', response.status);
+    
     const data = await response.json();
     console.log('Response data:', data);
 
@@ -59,13 +56,12 @@ const handleSubmit = async (e) => {
       setError(data.message);
     }
   } catch (err) {
-    console.error('Fetch error details:', err);
-    setError('Network error. Please try again or call us directly');
+    console.error('Fetch error:', err);
+    setError('Network error. Please call us directly at +234 906 382 1361');
   } finally {
     setLoading(false);
   }
 };
-
   return (
     <div className="consultation-page">
       <div className="consultation-header">

@@ -2,19 +2,10 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "functions": {
-    "api/send-message.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/send-message.js"
-    },
-    {
-      "src": "/(.*)\\.(js|css|png|jpg|jpeg|gif|svg|ico|json)$",
-      "dest": "/$1.$2"
     },
     {
       "src": "/(.*)",
