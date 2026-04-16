@@ -5,39 +5,10 @@
       "runtime": "nodejs20.x"
     }
   },
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/send-message.js"
-    },
-    {
-      "src": "/consultation",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/about",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/services",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/contact",
-      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
