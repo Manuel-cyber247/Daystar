@@ -5,7 +5,11 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    sourcemap: false
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
   },
   server: {
     port: 3000
