@@ -1,5 +1,8 @@
 {
   "name": "daystar-api",
   "version": "1.0.0",
-  "dependencies": {}
+  "type": "module",
+  "dependencies": {
+    "nodemailer": "^6.9.1"
+  }
 }
