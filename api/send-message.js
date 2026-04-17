@@ -6,12 +6,10 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
-  // Handle GET
   if (req.method === 'GET') {
     return res.status(200).json({ 
       success: true, 
@@ -19,12 +17,10 @@ export default async function handler(req, res) {
     });
   }
 
-  // Handle POST
   if (req.method === 'POST') {
     try {
       const { name, email, phone, subject, message } = req.body;
 
-      // Validate required fields
       if (!name || !email || !subject || !message) {
         return res.status(400).json({ 
           success: false, 
@@ -32,16 +28,14 @@ export default async function handler(req, res) {
         });
       }
 
-      // Check if email credentials are configured
       if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        console.error('Missing email credentials in environment variables');
+        console.error('Missing email credentials');
         return res.status(500).json({ 
           success: false, 
-          error: 'Email service not configured. Please contact the administrator.' 
+          error: 'Email service not configured.' 
         });
       }
 
-      // Create email transporter
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -50,13 +44,13 @@ export default async function handler(req, res) {
         }
       });
 
-      // Verify transporter works
       await transporter.verify();
 
-      // Email to hospital admin
+      // Email to hospital admin with REPLY-TO set to patient
       const adminMailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER, // Send to the hospital email
+        from: `"Daystar Hospital" <${process.env.EMAIL_USER}>`,
+        to: process.env.EMAIL_USER,
+        replyTo: email,  // 👈 CRITICAL: Replies go to patient
         subject: `📨 New Patient Message: ${subject}`,
         html: `
           <!DOCTYPE html>
@@ -69,6 +63,7 @@ export default async function handler(req, res) {
               .content { padding: 20px; background: white; border-radius: 10px; }
               .field { margin-bottom: 15px; }
               .label { font-weight: bold; color: #004d40; }
+              .reply-info { background: #e8f5e9; padding: 10px; border-radius: 5px; margin-top: 15px; }
               .footer { margin-top: 20px; padding: 10px; text-align: center; color: #666; font-size: 12px; }
             </style>
           </head>
@@ -84,8 +79,8 @@ export default async function handler(req, res) {
                   <p>${name}</p>
                 </div>
                 <div class="field">
-                  <div class="label">📧 Email:</div>
-                  <p>${email}</p>
+                  <div class="label">📧 Patient Email:</div>
+                  <p><a href="mailto:${email}">${email}</a></p>
                 </div>
                 <div class="field">
                   <div class="label">📞 Phone:</div>
@@ -98,6 +93,9 @@ export default async function handler(req, res) {
                 <div class="field">
                   <div class="label">💬 Message:</div>
                   <p>${message.replace(/\n/g, '<br>')}</p>
+                </div>
+                <div class="reply-info">
+                  <strong>💡 Quick Reply:</strong> Just click "Reply" and your response will go directly to <strong>${email}</strong>
                 </div>
               </div>
               <div class="footer">
@@ -112,7 +110,7 @@ export default async function handler(req, res) {
 
       // Auto-reply to patient
       const patientMailOptions = {
-        from: process.env.EMAIL_USER,
+        from: `"Daystar Specialist Hospital" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: `Thank you for contacting Daystar Specialist Hospital`,
         html: `
@@ -135,19 +133,16 @@ export default async function handler(req, res) {
               </div>
               <div class="content">
                 <h3>Dear ${name},</h3>
-                <p>Thank you for contacting Daystar Specialist Hospital. We have received your message and our medical team will review it shortly.</p>
+                <p>Thank you for contacting Daystar Specialist Hospital. We have received your message and will respond within 24 hours.</p>
                 <p><strong>Your message:</strong></p>
                 <p><em>"${message.substring(0, 200)}${message.length > 200 ? '...' : ''}"</em></p>
-                <p>We will get back to you within <strong>24 hours</strong> via email or phone.</p>
-                <p>If you need immediate medical assistance, please call our emergency line:</p>
-                <p><strong>📞 Emergency: +234 906 382 1361</strong></p>
+                <p>For emergencies, please call: <strong>+234 906 382 1361</strong></p>
                 <br>
                 <p>Best regards,</p>
                 <p><strong>Daystar Specialist Hospital Team</strong></p>
               </div>
               <div class="footer">
-                <p>© 2026 Daystar Specialist Hospital. All rights reserved.</p>
-                <p>NO. 10 DAYSTAR STREET, MGBEKE AMUCHE, NKWELLE-EZUNAKA, OYI, ANAMBRA STATE</p>
+                <p>© 2026 Daystar Specialist Hospital</p>
               </div>
             </div>
           </body>
@@ -155,11 +150,10 @@ export default async function handler(req, res) {
         `
       };
 
-      // Send both emails
       await transporter.sendMail(adminMailOptions);
       await transporter.sendMail(patientMailOptions);
 
-      console.log('Email sent successfully to hospital and patient:', email);
+      console.log('Email sent. Reply-To set to:', email);
       
       return res.status(200).json({ 
         success: true, 
@@ -170,7 +164,7 @@ export default async function handler(req, res) {
       console.error('Error sending email:', error);
       return res.status(500).json({ 
         success: false, 
-        error: 'Failed to send message. Please call us directly at +234 906 382 1361' 
+        error: 'Failed to send message. Please call us directly.' 
       });
     }
   }

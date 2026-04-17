@@ -108,7 +108,7 @@ export default function Home() {
             <h4>Dr. Nwankwo Ezekiel Uchechukwu</h4>
             <p>Plastic Surgeon</p>
             <div className="doctor-social">
-              <span>✉️ ezekiel@email.com</span>
+              <span>✉️ ucnwankwo3@gmail.com</span>
               <span>📞 08012345678</span>
             </div>
           </div>
